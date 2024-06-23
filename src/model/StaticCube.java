@@ -50,7 +50,7 @@ public class StaticCube extends Figure{
             face1[i][0] += positionX;
             face1[i][1] += positionY;
         }
-        //view.drawFillPolygon(face1, deepBlue);
+        view.drawFillPolygon(face1, deepBlue);
 
         //face 2 (Left)
         double[][] face2 = {{super.figurePoints2D[3][0], super.figurePoints2D[3][1]}, {super.figurePoints2D[0][0], super.figurePoints2D[0][1]},
@@ -61,7 +61,7 @@ public class StaticCube extends Figure{
             face2[i][0] += positionX;
             face2[i][1] += positionY;
         }
-        //view.drawFillPolygon(face2, lowBlue);
+        view.drawFillPolygon(face2, lowBlue);
 
         //face 3 (Front)
         double[][] face3 = {{super.figurePoints2D[2][0], super.figurePoints2D[2][1]}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]},
@@ -72,7 +72,7 @@ public class StaticCube extends Figure{
             face3[i][0] += positionX;
             face3[i][1] += positionY;
         }
-        //view.drawFillPolygon(face3, lowBlue);
+        view.drawFillPolygon(face3, lowBlue);
 
         //face 4 (Right)
         double[][] face4 = {{super.figurePoints2D[1][0], super.figurePoints2D[1][1]}, {super.figurePoints2D[2][0], super.figurePoints2D[2][1]},
@@ -83,7 +83,7 @@ public class StaticCube extends Figure{
             face4[i][0] += positionX;
             face4[i][1] += positionY;
         }
-        //view.drawFillPolygon(face4, lowBlue);
+        view.drawFillPolygon(face4, lowBlue);
 
         //face 5 (Back)
         double[][] face5 = {{super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[1][0], super.figurePoints2D[1][1]},
@@ -94,7 +94,7 @@ public class StaticCube extends Figure{
             face5[i][0] += positionX;
             face5[i][1] += positionY;
         }
-        //view.drawFillPolygon(face5, lowBlue);
+        view.drawFillPolygon(face5, lowBlue);
 
         //face 6 (Top)
         double[][] face6 = {{super.figurePoints2D[4][0], super.figurePoints2D[4][1]}, {super.figurePoints2D[5][0], super.figurePoints2D[5][1]},
@@ -105,7 +105,7 @@ public class StaticCube extends Figure{
             face6[i][0] += positionX;
             face6[i][1] += positionY;
         }
-        //view.drawFillPolygon(face6, darkBlue);
+        view.drawFillPolygon(face6, darkBlue);
 
         //details
         //double lineDeepBlue
