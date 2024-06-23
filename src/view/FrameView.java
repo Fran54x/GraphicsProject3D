@@ -25,6 +25,7 @@ public class FrameView extends JFrame {
     public double cont2;
     public Animation animation;
     public Scenary scenary;
+    public int[][] starsXY;
     public int[] brightness;
     public double[] sizeStarts;
     public Boolean[] brightnessFlag;
@@ -39,11 +40,23 @@ public class FrameView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.cont1 = 0;
         this.cont2 = 0;
-        brightness = new int[]{145, 90, 132, 110, 234, 250, 212, 180, 194, 155, 176, 85, 70, 69, 245, 190, 220, 186, 158, 140};
-        sizeStarts = new double[]{2, 1, 0, 1, 3, 2, 1, 1, 3, 2, 2, 1, 0, 1, 3, 2, 1, 1, 3, 2};
-        brightnessFlag = new Boolean[20];
-        sizeStartsFlag = new Boolean[20];
+        starsXY = new int[30][2];
+        brightness = new int[]{145, 90, 132, 110, 234, 250, 212, 180, 194, 155,
+                176, 85, 70, 69, 245, 190, 220, 186, 158, 140,
+                60, 82, 134, 178, 202, 252, 76, 56, 100, 102};
+        sizeStarts = new double[]{2, 1, 0, 1, 4, 2, 1, 5, 3, 2,
+                2, 1, 0, 1, 3, 2, 5, 1, 4, 2,
+                6, 2, 1, 0, 1, 3, 2, 5, 1, 4};
+        brightnessFlag = new Boolean[30];
+        sizeStartsFlag = new Boolean[30];
 
+        //30 starts
+        starsXY = new int[][]{{273, 14}, {309, 9}, {395, 90}, {433, 94}, {107, 464},
+                {479, 111}, {480, 56}, {499, 92}, {552, 491}, {487, 145},
+                {97, 327}, {34, 158}, {420, 484}, {377, 301}, {556, 385},
+                {191, 58}, {241, 304}, {34, 431}, {27, 350}, {98, 326},
+                {181, 402}, {107, 464}, {35, 431}, {26, 350}, {310, 519},
+                {441, 538}, {502, 462}, {554, 491}, {46, 27}, {440, 538}};
         for (int i = 0; i < brightnessFlag.length; i++) {
             brightnessFlag[i] = true;
         }
@@ -77,8 +90,6 @@ public class FrameView extends JFrame {
 
         try {
             //animation.menuGame();
-            //cubeScaling();
-            //scenary.drawPrueba();
             drawStart();
             sleep(60/1000);
             repaint();
@@ -383,26 +394,9 @@ public class FrameView extends JFrame {
     }
 
     public void drawStart(){
-        Color light_purlple = new Color(30, 33, 155);
-        Color red = new Color(255, 0, 0, 1);
-        drawFillEllipse(273, 14, (int) sizeStarts[0], (int) sizeStarts[0], new Color(brightness[0],brightness[0],brightness[0], 100));
-        drawFillEllipse(309, 9, (int) sizeStarts[1], (int) sizeStarts[1], new Color(brightness[1],brightness[1],brightness[1], 100));
-        drawFillEllipse(395, 90, (int) sizeStarts[2], (int) sizeStarts[2], new Color(brightness[2],brightness[2],brightness[2], 100));
-        drawFillEllipse(433, 94, (int) sizeStarts[3], (int) sizeStarts[3], new Color(brightness[3],brightness[3],brightness[3], 100));
-        drawFillEllipse(426, 139, (int) sizeStarts[4], (int) sizeStarts[4], new Color(brightness[4],brightness[4],brightness[4], 100));
-        drawFillEllipse(479, 111, (int) sizeStarts[5], (int) sizeStarts[5], new Color(brightness[5],brightness[5],brightness[5], 100));
-        drawFillEllipse(480, 56, (int) sizeStarts[6], (int) sizeStarts[6], new Color(brightness[6],brightness[6],brightness[6], 100));
-        drawFillEllipse(499, 92, (int) sizeStarts[7], (int) sizeStarts[7], new Color(brightness[7],brightness[7],brightness[7], 100));
-        drawFillEllipse(527, 129, (int) sizeStarts[8], (int) sizeStarts[8], new Color(brightness[8],brightness[8],brightness[8], 100));
-        drawFillEllipse(487, 145, (int) sizeStarts[9], (int) sizeStarts[9], new Color(brightness[9],brightness[9],brightness[9], 100));
+        for(int i = 0; i < brightness.length; i++){
+            drawFillEllipse(starsXY[i][0], starsXY[i][1], (int) sizeStarts[i], (int) sizeStarts[i], new Color(brightness[i], brightness[i], brightness[i], 100));
 
-        drawFillEllipse(97, 327, (int) sizeStarts[10], (int) sizeStarts[10], new Color(brightness[10],brightness[10],brightness[10], 100));
-        drawFillEllipse(34, 158, (int) sizeStarts[11], (int) sizeStarts[11], new Color(brightness[11],brightness[11],brightness[11], 100));
-        drawFillEllipse(420, 484, (int) sizeStarts[12], (int) sizeStarts[12], new Color(brightness[12],brightness[12],brightness[12], 100));
-        drawFillEllipse(377, 301, (int) sizeStarts[13], (int) sizeStarts[13], new Color(brightness[13],brightness[13],brightness[13], 100));
-        drawFillEllipse(556, 385, (int) sizeStarts[14], (int) sizeStarts[14], new Color(brightness[14],brightness[14],brightness[14], 100));
-
-        for (int i = 0; i < brightness.length; i++) {
             if(brightnessFlag[i]) {
                 if(brightness[i] >= 250){
                     brightnessFlag[i] = false;
@@ -410,14 +404,14 @@ public class FrameView extends JFrame {
                     brightness[i]++;
                 }
             } else {
-                if(brightness[i] <= 140) {
+                if(brightness[i] <= 70) {
                     brightnessFlag[i] = true;
                 } else {
                     brightness[i]--;
                 }
             }
             if (sizeStartsFlag[i]) {
-                if(sizeStarts[i] >= 5){
+                if(sizeStarts[i] >= 3){
                     sizeStartsFlag[i] = false;
                 } else {
                     sizeStarts[i]+=0.005;
