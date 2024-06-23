@@ -89,7 +89,7 @@ public class FrameView extends JFrame {
 //        }
 
         try {
-            //animation.menuGame();
+            //scenary.drawLevel();
             drawStart();
             sleep(60/1000);
             repaint();
@@ -228,6 +228,25 @@ public class FrameView extends JFrame {
         // Rellenar el área interior del rectángulo
         for (int y = y0 + 1; y < yf; y++) {
             drawDDALine(x0, y, xf, y, fillColor);
+        }
+    }
+
+    public void drawPolygon(double listPoints[][], Color c) {
+        int points = listPoints.length;
+        int[] x = new int[points];
+        int[] y = new int[points];
+
+        for (int i = 0; i < points; i++) {
+            x[i] = (int) Math.round(listPoints[i][0]);
+            y[i] = (int) Math.round(listPoints[i][1]);
+        }
+
+        for (int i = 0; i < x.length; i++) {
+            if ((i + 1) != x.length) {
+                drawDDALine(x[i], y[i], x[i + 1], y[i + 1], c);
+            } else {
+                drawDDALine(x[i], y[i], x[0], y[0], c);
+            }
         }
     }
 
