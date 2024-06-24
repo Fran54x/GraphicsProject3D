@@ -11,7 +11,7 @@ import java.util.Collections;
 import static java.lang.Thread.sleep;
 
 public class FrameView extends JFrame {
-
+    private double counter;
     // attributes
     private BufferedImage buffer;
     private Graphics graphics;
@@ -89,7 +89,8 @@ public class FrameView extends JFrame {
 //        }
 
         try {
-            scenary.drawLevel();
+            cont1+=0.1;
+            scenary.drawLevel(cont1);
             drawStart();
             sleep(60/1000);
             repaint();
