@@ -7,6 +7,7 @@ public class OperationCalculations3D {
     private double[][] transformMatrix;
     private double[][] projectedPoints;
     private int points;
+    private  double xp,zp,yp;
 
     public OperationCalculations3D(double[][] originalPoints) {
         this.points = originalPoints.length;
@@ -28,21 +29,22 @@ public class OperationCalculations3D {
             this.originalPoints[i][1] = originalPoints[i][1];
             this.originalPoints[i][2] = originalPoints[i][2];
         }
-
-        // Projecting the points
-        for (int i = 0; i < points; i++) {
-            double u = - (this.originalPoints[i][2] / zp);
-            this.projectedPoints[i][0] = this.originalPoints[i][0] + (xp * u);
-            this.projectedPoints[i][1] = this.originalPoints[i][1] + (yp * u);
-        }
-        this.pointsXYZ = this.projectedPoints.clone();
+        this.pointsXYZ = originalPoints.clone();
+        this.zp=zp;
+        this.xp=xp;
+        this.yp=yp;
         //printProjectedPoints();
     }
-
     // Methods for operation of 2D points
 
     public double[][] getProjectedPoints() {
-        return projectedPoints;
+        // Projecting the points
+        for (int i = 0; i < points; i++) {
+            double u = - (this.pointsXYZ[i][2] / this.zp);
+            this.pointsXYZ[i][0] = this.pointsXYZ[i][0] + (this.xp * u);
+            this.pointsXYZ[i][1] = this.pointsXYZ[i][1] + (this.yp * u);
+        }
+        return this.pointsXYZ;
     }
 
     public double[][] getPointsXYZ() {
@@ -72,7 +74,8 @@ public class OperationCalculations3D {
         matrixT[1][3] = ty;
         matrixT[2][3] = tz;
         double[][] matrixP = buildMatrixP();
-        return calculateMatrixProduct(matrixT, matrixP, 1);
+        this.pointsXYZ = calculateMatrixProduct(matrixT, matrixP, 1);
+        return pointsXYZ;
     }
 
     public double[][] scaling(double sx, double sy, double sz) {
@@ -121,7 +124,8 @@ public class OperationCalculations3D {
         matrixR[2][2] = 1;
         matrixR[3][3] = 1;
         double[][] matrixP = buildMatrixP();
-        return calculateMatrixProduct(matrixR, matrixP, 33);
+        this.pointsXYZ = calculateMatrixProduct(matrixR, matrixP, 33);
+        return pointsXYZ;
     }
 
     private double[][] buildMatrixP() {
@@ -153,7 +157,7 @@ public class OperationCalculations3D {
                 transformMatrix[i][j] = matrixT[j][i];
             }
         }
-        printOperationPoints(opc);
+//        printOperationPoints(opc);
         return transformMatrix;
     }
 
@@ -189,7 +193,24 @@ public class OperationCalculations3D {
     }
 
     public static void main(String[] args) {
-        double[][] pointsXY = {{1, 2, 3}};
+        double[][] pointsXY = {
+                {300, 150, 50},
+                {350, 125, 50},
+                {400, 150, 50},
+                {450, 125, 50},
+                {500, 150, 50},
+                {450, 175, 50},
+                {500, 200, 50},
+                {450, 225, 50},//
+                {300, 200, 50},
+                {350, 175, 50},
+                {400, 200, 50},
+                {450, 175, 50},
+                {500, 200, 50},
+                {450, 225, 50},
+                {500, 250, 50},
+                {450, 275, 50}
+        };
         OperationCalculations3D op = new OperationCalculations3D(pointsXY);
         op.translation(2, 3, 4);
         op.scaling(2, 2, 2);
