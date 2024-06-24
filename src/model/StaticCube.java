@@ -5,9 +5,15 @@ import view.FrameView;
 import java.awt.*;
 
 public class StaticCube extends Figure{
+    private Boolean mode;
+    Color darkBlue;
+    Color deepBlue;
+    Color purple;
+    Color lowBlue;
 
     public StaticCube(FrameView view){
         super(view);
+        mode = false;
     }
 
     public StaticCube(FrameView view, double[][] figurePoints2D, Color border) {
@@ -36,10 +42,18 @@ public class StaticCube extends Figure{
         view.drawDDALine((int) super.figurePoints2D[7][0] + positionX, (int) super.figurePoints2D[7][1] + positionY, (int) super.figurePoints2D[4][0] + positionX, (int) super.figurePoints2D[4][1] + positionY, super.border);
 
         //faces
-        Color darkBlue = new Color(14, 17, 36);
-        Color purple = new Color(132, 66, 195);
-        Color lowBlue = new Color(76, 124, 245);
-        Color deepBlue = new Color(11, 93, 222);
+
+        if (!mode){
+            darkBlue = new Color(14, 17, 36);
+            purple = new Color(132, 66, 195);
+            lowBlue = new Color(76, 124, 245);
+            deepBlue = new Color(11, 93, 222);
+        }else {
+            darkBlue = new Color(95, 169, 52);
+            purple = new Color(66, 195, 176);
+            lowBlue = new Color(36, 84, 31);
+            deepBlue = new Color(126, 27, 71);
+        }
 
         //face 1 (Bottom)
         double[][] face1 = {{super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[1][0], super.figurePoints2D[1][1]},
@@ -100,15 +114,20 @@ public class StaticCube extends Figure{
 
         //double lineDeepBlue
         //face 2 detail
-        double[][] detailLineFace2Blue = {{super.figurePoints2D[3][0], super.figurePoints2D[3][1]}, {super.figurePoints2D[0][0], super.figurePoints2D[0][1]},
-                {super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], (double) 1/4)},
-                {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], (double) 1/4)}, {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], (double) 1/4)},
-                {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], (double) 1/4)}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]}};
+        double[][] detailLineFace2Blue = {{super.figurePoints2D[3][0], super.figurePoints2D[3][1]},
+                {super.figurePoints2D[0][0], super.figurePoints2D[0][1]},
+                {super.figurePoints2D[0][0], super.figurePoints2D[0][1]},
+                {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], (double) 1/4)},
+                {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], (double) 1/4)},
+                {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], (double) 1/4)},
+                {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], (double) 1/4)},
+
+                {super.figurePoints2D[3][0], super.figurePoints2D[3][1]}};
         for (int i = 0; i < 8; i++) { //accommodate mask position
             detailLineFace2Blue[i][0] += positionX;
             detailLineFace2Blue[i][1] += positionY;
         }
-        view.drawFillPolygon(detailLineFace2Blue, deepBlue);
+        //view.drawFillPolygon(detailLineFace2Blue, deepBlue);
 
         //face 3 detail
         double[][] detailLineFace3Blue = {{super.figurePoints2D[2][0], super.figurePoints2D[2][1]}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]},
@@ -130,7 +149,7 @@ public class StaticCube extends Figure{
             detailLineFace4Blue[i][0] += positionX;
             detailLineFace4Blue[i][1] += positionY;
         }
-        //view.drawFillPolygon(detailLineFace4Blue, Color.RED);
+        view.drawFillPolygon(detailLineFace4Blue, lowBlue);
 
         //face 5 detail
         double[][] detailLineFace5Blue = {{super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[1][0], super.figurePoints2D[1][1]},
@@ -141,7 +160,7 @@ public class StaticCube extends Figure{
             detailLineFace5Blue[i][0] += positionX;
             detailLineFace5Blue[i][1] += positionY;
         }
-        //view.drawFillPolygon(detailLineFace5Blue, Color.RED);
+        view.drawFillPolygon(detailLineFace5Blue, lowBlue);
 
         //double linePurlple
         //face 2 detail
@@ -186,7 +205,7 @@ public class StaticCube extends Figure{
             detailLineFace5Purple[i][0] += positionX;
             detailLineFace5Purple[i][1] += positionY;
         }
-        view.drawFillPolygon(detailLineFace5Purple, purple);
+        //view.drawFillPolygon(detailLineFace5Purple, purple);
 
 
         //face 6 (Top)
@@ -211,6 +230,10 @@ public class StaticCube extends Figure{
 //            detailLineFace2prueba[i][1] += positionY;
 //        }
 //        view.drawPolygon(detailLineFace2prueba, deepBlue);
+    }
+
+    public void setMode(Boolean mode) {
+        this.mode = mode;
     }
 
     public double accommodateMaskPosition(double highestPoint, double lowestPoint, double multiplier) {

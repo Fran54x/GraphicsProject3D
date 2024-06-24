@@ -118,22 +118,6 @@ public class TranslatedCube extends Figure{
                 face3[i][0] += positionX;
                 face3[i][1] += positionY;
             }
-            view.drawFillPolygon(face3, obscureyellow);
-//
-
-//
-            //face 5 (Back)
-//        double[][] face5 = {{super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[1][0], super.figurePoints2D[1][1]},
-//                {super.figurePoints2D[1][0], super.figurePoints2D[1][1]}, {super.figurePoints2D[5][0], super.figurePoints2D[5][1]},
-//                {super.figurePoints2D[5][0], super.figurePoints2D[5][1]}, {super.figurePoints2D[4][0], super.figurePoints2D[4][1]},
-//                {super.figurePoints2D[4][0], super.figurePoints2D[4][1]}, {super.figurePoints2D[0][0], super.figurePoints2D[0][1]}};
-//        for (int i = 0; i < 8; i++) { //accommodate mask position
-//            face5[i][0] += positionX;
-//            face5[i][1] += positionY;
-//        }
-//        view.drawFillPolygon(face5, white);
-//
-            //face 6 (Top)
             double[][] face6 = {{super.figurePoints2D[8][0], super.figurePoints2D[8][1]}, {super.figurePoints2D[9][0], super.figurePoints2D[9][1]},
                     {super.figurePoints2D[9][0], super.figurePoints2D[9][1]}, {super.figurePoints2D[10][0], super.figurePoints2D[10][1]},
                     {super.figurePoints2D[10][0], super.figurePoints2D[10][1]}, {super.figurePoints2D[11][0], super.figurePoints2D[11][1]},
@@ -229,45 +213,12 @@ public class TranslatedCube extends Figure{
             }
             view.drawFillPolygon(face6, yellow);
         }
-//
-//        //details
-//        //double lineDeepBlue
-//        //face 2 detail
-//        double[][] detailLineFace2 = {{super.figurePoints2D[3][0], super.figurePoints2D[3][1]}, {super.figurePoints2D[0][0], super.figurePoints2D[0][1]},
-//                {super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], 4)},
-//                {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], 4)}, {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], 4)},
-//                {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], 4)}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]}};
-//        for (int i = 0; i < 8; i++) { //accommodate mask position
-//            detailLineFace2[i][0] += positionX;
-//            detailLineFace2[i][1] += positionY;
-//        }
-//        view.drawPolygon(detailLineFace2, deepBlue);
-//
-//        //face 2 detail
-//        double[][] detailLineFace3 = {{super.figurePoints2D[2][0], super.figurePoints2D[2][1]}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]},
-//                {super.figurePoints2D[3][0], super.figurePoints2D[3][1]}, {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[0][1], 4)},
-//                {super.figurePoints2D[4][0], accommodateMaskPosition(figurePoints2D[4][1], figurePoints2D[0][1], 4)}, {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], 4)},
-//                {super.figurePoints2D[7][0], accommodateMaskPosition(figurePoints2D[7][1], figurePoints2D[3][1], 4)}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]}};
-//        for (int i = 0; i < 8; i++) { //accommodate mask position
-//            detailLineFace2[i][0] += positionX;
-//            detailLineFace2[i][1] += positionY;
-//        }
-//        view.drawPolygon(detailLineFace2, deepBlue);
-
-        //RAYO MQUIIN CUCHAO
-//        double[][] detailLineFace2prueba = {{super.figurePoints2D[3][0], super.figurePoints2D[3][1]}, {super.figurePoints2D[0][0], super.figurePoints2D[0][1]},
-//                {super.figurePoints2D[0][0], super.figurePoints2D[0][1]}, {super.figurePoints2D[5][0], (figurePoints2D[5][1])},
-//                {super.figurePoints2D[5][0], (figurePoints2D[5][1])}, {super.figurePoints2D[6][0], (figurePoints2D[6][1])},
-//                {super.figurePoints2D[6][0], (figurePoints2D[6][1])}, {super.figurePoints2D[3][0], super.figurePoints2D[3][1]}};
-//        for (int i = 0; i < 4; i++) { //accommodate mask position
-//            detailLineFace2prueba[i][0] += positionX;
-//            detailLineFace2prueba[i][1] += positionY;
-//        }
-//        view.drawPolygon(detailLineFace2prueba, deepBlue);
     }
 
     public double accommodateMaskPosition(double highestPoint, double lowestPoint, int divisor) {
         highestPoint = ((highestPoint - lowestPoint) / divisor) + lowestPoint;
         return highestPoint;
     }
+
+
 }

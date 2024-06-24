@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.sound.sampled.*;
+import java.io.*;
 
 import static java.lang.Thread.sleep;
 
@@ -20,7 +22,7 @@ public class FrameView extends JFrame {
     public final int HEIGHT = 600;
     public double[][] pP; // proyectedPoints
     public int points;
-
+    public double incrementCounter, actualTemp;
     public double cont1;
     public double cont2;
     public Animation animation;
@@ -33,6 +35,7 @@ public class FrameView extends JFrame {
 
     //constructor
     public FrameView() {
+        startAudio();
         setTitle("Projection 3D - View.Animation");
         setSize(WIDTH, HEIGHT);
         setLayout(null);
@@ -70,6 +73,26 @@ public class FrameView extends JFrame {
         //graphics = (Graphics2D) buffer.getGraphics();
     }
 
+    private void startAudio() {
+        Thread audioThread = new Thread(()->{
+            try {
+                Clip clip =  AudioSystem.getClip();
+
+                // Abrir el clip y cargar el audio desde el stream
+                clip.open(AudioSystem.getAudioInputStream(FrameView.class.getResource("/images/song.wav")));
+
+                // Reproducir en un bucle infinito
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+
+                // Esperar hasta que se termine la reproducción
+            }catch (UnsupportedAudioFileException | LineUnavailableException | IOException e){
+                throw new RuntimeException(e);
+            }
+        });
+        audioThread.start();
+    }
+
     //methods
     public void PutPixel(int x, int y, Color color){
         if(x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT){
@@ -89,8 +112,9 @@ public class FrameView extends JFrame {
 //        }
 
         try {
-            cont1+=0.1;
-            scenary.drawLevel(cont1);
+            incrementCounter+=0.01;
+            actualTemp+=1;
+            scenary.drawLevel(incrementCounter,actualTemp);
             drawStart();
             sleep(60/1000);
             repaint();
