@@ -89,7 +89,7 @@ public class FrameView extends JFrame {
 //        }
 
         try {
-            //scenary.drawLevel();
+            scenary.drawLevel();
             drawStart();
             sleep(60/1000);
             repaint();
