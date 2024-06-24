@@ -31,8 +31,9 @@ public class Scenary {
 
     public void drawLevel() {
         StaticCube cube = new StaticCube(v);
-        //cube.setBorder(new Color(255, 255, 255));
-        //cube.drawFigure();
-
+        cube.setBorder(new Color(255, 255, 255));
+        cube.drawFigure();
+        //cube.
+        //cube.
     }
 }

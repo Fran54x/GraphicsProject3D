@@ -3,7 +3,6 @@ package model;
 import view.FrameView;
 
 import java.awt.*;
-import java.lang.annotation.Inherited;
 
 public abstract class Figure {
 
@@ -18,12 +17,12 @@ public abstract class Figure {
     protected double[][] traslatingPoints;
     protected double[][] scalingPoints;
     protected double[][] rotatingPoints;
-    OperationCalculations operation;
+    OperationCalculations3D operation;
 
     public Figure(FrameView view) {
         this.view = view;
         this.figurePoints3D = new double[][]{{50,50,50}, {150,50,50}, {150,50,150}, {50,50,150} ,{50,150,50}, {150,150,50}, {150,150,150}, {50,150,150}};
-        this.operation = new OperationCalculations(-5, 2, 10, figurePoints3D);
+        this.operation = new OperationCalculations3D(-5, 2, 10, figurePoints3D);
         this.figurePoints2D = operation.getProjectedPoints();
         this.positionX = 50;
         this.positionY = 80;
@@ -31,14 +30,14 @@ public abstract class Figure {
     }
 
     public Figure(FrameView view, double[][] figurePoints3D, Color border) {
-        this.operation = new OperationCalculations(0, 0, 1, figurePoints3D);
+        this.operation = new OperationCalculations3D(0, 0, 1, figurePoints3D);
         this.figurePoints2D = operation.getProjectedPoints();
         this.view = view;
         this.border = border;
     }
 
     public Figure(FrameView view, double[][] figurePoints3D, Color border, int positionX, int positionY, double xp, double yp, double zp) {
-        this.operation = new OperationCalculations(xp, yp, zp, figurePoints3D);
+        this.operation = new OperationCalculations3D(xp, yp, zp, figurePoints3D);
         this.figurePoints2D = operation.getProjectedPoints();
         this.view = view;
         this.border = border;
@@ -47,7 +46,7 @@ public abstract class Figure {
     }
 
     public Figure(FrameView view, double[][] figurePoints3D, Color border, Color background, int positionX, int positionY, double xp, double yp, double zp) {
-        this.operation = new OperationCalculations(0, 0, 0, figurePoints3D);
+        this.operation = new OperationCalculations3D(0, 0, 0, figurePoints3D);
         this.figurePoints2D = operation.getProjectedPoints();
         this.view = view;
         this.border = border;
@@ -104,12 +103,16 @@ public abstract class Figure {
         return this.background;
     }
 
-    public void traslating(double tx, double ty) {
-        this.figurePoints2D = operation.translation(tx, ty);
+    public void traslating(double tx, double ty, double tz) {
+        this.figurePoints2D = operation.translation(tx, ty, tz);
     }
 
-    public void scaling(double scaleX, double scaleY) {
-        this.figurePoints2D = this.operation.scaling(scaleX, scaleY);
+    public void scaling(double scaleX, double scaleY, double scaleZ) {
+        this.figurePoints2D = this.operation.scaling(scaleX, scaleY, scaleZ);
+    }
+
+    public void rotatingX(){
+        //this.figurePoints3D
     }
 
     public void drawFigure() {
