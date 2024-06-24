@@ -1,6 +1,6 @@
 package view;
 
-import model.OperationCalculations;
+import model.OperationCalculations3D;
 
 import javax.swing.*;
 import java.awt.*;
@@ -115,7 +115,7 @@ public class FrameView extends JFrame {
         //Convert 3D Points to 2D
         cont1-=0.005;
         cont2+=0.01;
-        OperationCalculations op = new OperationCalculations(1,1,5, cube1);
+        OperationCalculations3D op = new OperationCalculations3D(1,1,5, cube1);
         op.getProjectedPoints();
 
         this.pP = op.getProjectedPoints();
@@ -128,7 +128,7 @@ public class FrameView extends JFrame {
 
         cont1-=0.01;
         cont2+=0.005;
-        op = new OperationCalculations(cont1,cont2,5, cube2);
+        op = new OperationCalculations3D(cont1,cont2,5, cube2);
         op.getProjectedPoints();
 
         this.pP = op.getProjectedPoints();
@@ -148,7 +148,7 @@ public class FrameView extends JFrame {
 
         cont1-=0.01;
         cont2+=0.005;
-        OperationCalculations op = new OperationCalculations(cont1, cont2,5, cubeScaling);
+        OperationCalculations3D op = new OperationCalculations3D(cont1, cont2,5, cubeScaling);
 
         //CalculateProyection cp = new CalculateProyection(cont1, cont2,5, cubeScaling);
         //op.rotating(cont2);

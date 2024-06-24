@@ -1,10 +1,5 @@
 package view;
 
-import model.StaticCube;
-import model.OperationCalculations;
-
-import java.awt.*;
-
 public class Animation {
 
     //attributes
