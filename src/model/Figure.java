@@ -5,7 +5,8 @@ import view.FrameView;
 import java.awt.*;
 
 public abstract class Figure {
-
+    protected double speedX, speedY,speedZ;
+    public double posX, posY,posZ;
     protected double[][] figurePoints3D;
     protected double[][] figurePoints2D;
     protected Color border;
@@ -23,7 +24,6 @@ public abstract class Figure {
         this.view = view;
         this.figurePoints3D = new double[][]{{50,50,50}, {150,50,50}, {150,50,150}, {50,50,150} ,{50,150,50}, {150,150,50}, {150,150,150}, {50,150,150}};
         this.operation = new OperationCalculations3D(-5, 2, 10, figurePoints3D);
-        this.figurePoints2D = operation.getProjectedPoints();
         this.positionX = 50;
         this.positionY = 80;
         this.border = Color.BLACK;
@@ -31,7 +31,6 @@ public abstract class Figure {
 
     public Figure(FrameView view, double[][] figurePoints3D, Color border) {
         this.operation = new OperationCalculations3D(0, 0, 1, figurePoints3D);
-        this.figurePoints2D = operation.getProjectedPoints();
         this.view = view;
         this.border = border;
     }
@@ -103,8 +102,17 @@ public abstract class Figure {
         return this.background;
     }
 
-    public void traslating(double tx, double ty, double tz) {
-        this.figurePoints2D = operation.translation(tx, ty, tz);
+    public void traslating(double counter) {
+        double tx = 0,ty,tz;
+        tz = counter * getSpeedZ();
+        ty = counter * getSpeedY();
+        System.out.println(positionX+" : "+getPosX());
+        if(positionX<getPosX())
+            tx = counter * getSpeedX();
+        this.figurePoints3D = operation.translation(tx,ty,tz);
+    }
+    public void projecting() {
+        this.figurePoints2D = operation.getProjectedPoints();
     }
 
     public void scaling(double scaleX, double scaleY, double scaleZ) {
@@ -117,5 +125,56 @@ public abstract class Figure {
 
     public void drawFigure() {
 
+    }
+
+    public double getSpeedX() {
+        return speedX;
+    }
+
+    public void setSpeedX(double speedX) {
+        this.speedX = speedX;
+    }
+
+    public double getSpeedY() {
+        return speedY;
+    }
+    public double getSpeedZ() {
+        return speedZ;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
+    }
+
+    public void setSpeedXYZ(double speedX, double speedY,double speedZ) {
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.speedZ = speedZ;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
+
+    public double getPosZ() {
+        return posZ;
+    }
+
+    public void setPosXYZ(double posX,double posY,double posZ) {
+        this.posX = posX;
+        this.posY = posY;
+        this.posZ = posZ;
     }
 }
